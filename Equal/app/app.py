@@ -7,19 +7,22 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-class Multiplication(Resource):
+class Equal(Resource):
    def get(self,arg1,arg2):
-       res = int(arg1)*int(arg2)
-       return Response(
+        if(int(arg1)==int(arg2)):
+           res = True
+        else:
+            res = False
+        return Response(
            response = json.dumps({"result":res}),
            status = 200
        )
 
-api.add_resource(Multiplication,"/mul/<int:arg1>/<int:arg2>")
+api.add_resource(Equal,"/equal/<int:arg1>/<int:arg2>")
 
 if __name__ == '__main__':
     app.run(
         debug=True,
-        port=5053,
+        port=5063,
         host="0.0.0.0"
     )

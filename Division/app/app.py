@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-class Add(Resource):
+class Div(Resource):
    def get(self,arg1,arg2):
         if(int(arg2)==0):
             res = "division by zero error :"
@@ -18,7 +18,7 @@ class Add(Resource):
            status = 200
        )
 
-api.add_resource(Add,"/div/<int:arg1>/<int:arg2>")
+api.add_resource(Div,"/div/<int:arg1>/<int:arg2>")
 
 if __name__ == '__main__':
     app.run(

@@ -3,23 +3,24 @@ from flask_restful import Api,Resource
 import requests
 import json
 import os
+import math
 
 app = Flask(__name__)
 api = Api(app)
 
-class Multiplication(Resource):
+class GCD(Resource):
    def get(self,arg1,arg2):
-       res = int(arg1)*int(arg2)
+       res = math.gcd(int(arg1),int(arg2))
        return Response(
            response = json.dumps({"result":res}),
            status = 200
        )
 
-api.add_resource(Multiplication,"/mul/<int:arg1>/<int:arg2>")
+api.add_resource(GCD,"/gcd/<int:arg1>/<int:arg2>")
 
 if __name__ == '__main__':
     app.run(
         debug=True,
-        port=5053,
+        port=5055,
         host="0.0.0.0"
     )

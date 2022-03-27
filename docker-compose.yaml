@@ -8,24 +8,58 @@ services:
       - 5050:5050  # host:container
   # Add more services below
 
-  addition-service:
+  add-service:
     build: ./Addition  # path is relative to docker-compose.yml location
-    hostname: addition-service
+    hostname: add-service
     ports:
       - 5051:5051  # host:container
-    
   minus-service:
     build: ./Subtraction  # path is relative to docker-compose.yml location
     hostname: minus-service
     ports:
       - 5052:5052
-  multiply-service:
+  mul-service:
     build: ./Multiplication  # path is relative to docker-compose.yml location
-    hostname: multiplication-service
+    hostname: mul-service
     ports:
       - 5053:5053
-  division-service:
+  div-service:
     build: ./Division  # path is relative to docker-compose.yml location
-    hostname: division-service
+    hostname: div-service
     ports:
       - 5054:5054
+  gcd-service:
+    build: ./Gcd  # path is relative to docker-compose.yml location
+    hostname: gcd-service
+    ports:
+      - 5055:5055
+  modulo-service:
+    build: ./Modulo
+    hostname: modulo-service
+    ports:
+      - 5056:5056
+  lcm-service:
+    build: ./Lcm
+    hostname: lcm-service
+    ports:
+      - 5057:5057
+  exp-service:
+    build: ./Exponent
+    hostname: exp-service
+    ports:
+      - 5058:5058
+  gt-service:
+    build: ./Greater
+    hostname: gt-service
+    ports:
+      - 5061:5061
+  lt-service:
+    build: ./Lesser
+    hostname: lt-service
+    ports:
+      - 5062:5062
+  equal-service:
+    build: ./Equal
+    hostname: equal-service
+    ports:
+      - 5063:5063

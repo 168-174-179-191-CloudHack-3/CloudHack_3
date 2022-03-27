@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-class Add(Resource):
+class Subtraction(Resource):
    def get(self,arg1,arg2):
        res = int(arg1)-int(arg2)
        return Response(
@@ -15,7 +15,7 @@ class Add(Resource):
            status = 200
        )
 
-api.add_resource(Add,"/sub/<int:arg1>/<int:arg2>")
+api.add_resource(Subtraction,"/minus/<int:arg1>/<int:arg2>")
 
 if __name__ == '__main__':
     app.run(
