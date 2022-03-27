@@ -9,17 +9,20 @@ api = Api(app)
 
 class Add(Resource):
    def get(self,arg1,arg2):
-       res = int(arg1)+int(arg2)
-       return Response(
+        if(int(arg2)==0):
+            res = "division by zero error :"
+        else:
+            res = int(arg1)/int(arg2)
+        return Response(
            response = json.dumps({"result":res}),
            status = 200
        )
 
-api.add_resource(Add,"/add/<int:arg1>/<int:arg2>")
+api.add_resource(Add,"/div/<int:arg1>/<int:arg2>")
 
 if __name__ == '__main__':
     app.run(
         debug=True,
-        port=5051,
+        port=5054,
         host="0.0.0.0"
     )

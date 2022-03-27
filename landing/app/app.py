@@ -1,128 +1,87 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for,jsonify
+import requests
+from flask_restful import Api,Resource
 import json
 import requests
 import os
 
+
+
 app = Flask(__name__)
+api = Api(app)
 app.secret_key = 'thisisjustarandomstring'
 
 
-
-def add(n1, n2):
-
-    #data = requests.get(f'http://addition-service:5050/{n1}/{n2}')
-
-    #return data.json()['result']
-    return n1+n2
+# def add(n1, n2):
+#     # n1 = int(n1)
+#     # n2 = int(n2)
+#     # return (n1+n2)
+#     return app.add(n1,n2)
 
 
 def minus(n1, n2):
+    n1 = int(n1)
+    n2 = int(n2)
     return n1-n2
 
-
 def multiply(n1, n2):
-
+    n1 = int(n1)
+    n2 = int(n2)
     return n1*n2
 
-
 def divide(n1, n2):
-
-    if (n2 == 0): 
-
-    	return "Division  by Zero"
-
+    n1 = int(n1)
+    n2 = int(n2)
+    if(n2 ==0):
+        return "not valid"
     return n1/n2
 
+@app.route('/',methods=['GET'])
+def home():
+    return render_template('index.html')
 
-
-@app.route('/', methods=['POST', 'GET'])
-
-
-
+@app.route('/', methods=['POST'])
 def index():
-
-    try : 
-
-        number_1 = request.form.get("first")
-
-        number_2 = request.form.get('second')
-
-
-        number_1 = int(number_1)
+    number_1 = request.form.get("first")
+    number_2 = request.form.get('second')
+    
+    if number_1 =='':
+        number_1 = 0
+    if number_2 == '':
+        number_2 = 0
 
 
 
-        number_2 = int(number_2)
+    operation = request.form.get('operation')
+    result = 0
+    if operation == 'add':
+        url = "http://addition-service:5051/add/"+str(number_1)+"/"+str(number_2)
+        res = (requests.get(url).text)
+        result = json.loads(res)
+        result = result['result']
+    elif operation == 'minus':
+        url = "http://minus-service:5052/sub/"+str(number_1)+"/"+str(number_2)
+        res = (requests.get(url).text)
+        result = json.loads(res)
+        result = result['result']
+    elif operation == 'multiply':
+        url = "http://multiplication-service:5053/mul/"+str(number_1)+"/"+str(number_2)
+        res = (requests.get(url).text)
+        result = json.loads(res)
+        result = result['result']
+    elif operation == 'divide':
+        url = "http://division-service:5054/div/"+str(number_1)+"/"+str(number_2)
+        res = (requests.get(url).text)
+        result = json.loads(res)
+        result = result['result']
 
-        operation = request.form.get('operation')
+    flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
 
-        result = 0
-
-
-
-        if operation == 'add':
-
-
-
-            result = add(number_1, number_2)
-
-
-
-        elif operation == 'minus':
-
-
-
-            result =  minus(number_1, number_2)
-
-
-
-        elif operation == 'multiply':
-
-
-
-            result = multiply(number_1, number_2)
-
-
-
-        elif operation == 'divide':
-
-
-
-            result = divide(number_1, number_2)
-
-
-
-        flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')   
-
-    except ValueError: 
-
-        flash("Enter an integer")
-
-    finally: 
-
-        return render_template('index.html')
-
-
-
+    return render_template('index.html')
 
 if __name__ == '__main__':
-
-
-
     app.run(
-
-
-
         debug=True,
-
-
-
         port=5050,
-
-
-
         host="0.0.0.0"
-
-
-
     )
