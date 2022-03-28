@@ -18,7 +18,7 @@ class Equal(Resource):
            status = 200
        )
 
-api.add_resource(Equal,"/equal/<int:arg1>/<int:arg2>")
+api.add_resource(Equal,"/equal/<string:arg1>/<string:arg2>")
 
 if __name__ == '__main__':
     app.run(

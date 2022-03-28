@@ -51,6 +51,8 @@ def index():
         number_2 = 0
 
 
+    number_1 = int(number_1)
+    number_2 = int(number_2)
 
     operation = request.form.get('operation')
     result = 0
@@ -71,6 +73,7 @@ def index():
     #print(url)
     res = (requests.get(url).text)
     result = json.loads(res)
+    #print(result)
     result = result['result']
 
 

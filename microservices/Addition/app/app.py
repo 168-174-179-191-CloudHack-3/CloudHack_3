@@ -15,7 +15,12 @@ class Add(Resource):
            status = 200
        )
 
-api.add_resource(Add,"/add/<int:arg1>/<int:arg2>")
+
+
+
+    
+
+api.add_resource(Add,"/add/<string:arg1>/<string:arg2>")
 
 if __name__ == '__main__':
     app.run(

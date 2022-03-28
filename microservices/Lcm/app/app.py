@@ -18,7 +18,7 @@ class LCM(Resource):
            status = 200
        )
 
-api.add_resource(LCM,"/lcm/<int:arg1>/<int:arg2>")
+api.add_resource(LCM,"/lcm/<string:arg1>/<string:arg2>")
 
 if __name__ == '__main__':
     app.run(
