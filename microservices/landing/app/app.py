@@ -62,7 +62,7 @@ def index():
                 "div":5054,
                 "gcd":5055,
                 "modulo":5056,
-                "lcm":5057,
+                "lcm":5068,
                 "exp":5058,
                 "gt":5061,
                 "lt":5062,
@@ -143,6 +143,8 @@ def index():
         operation = '<'
     elif(operation== "equal"):
         operation = "=="
+    elif(operation == "mul"):
+        operation = "*"
     flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
 
     return render_template('index.html')
