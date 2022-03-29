@@ -31,12 +31,14 @@ Earlier the four functions **Addition,Subtraction,Multiplication,Division** were
 * Added more functions 
 
 ## High Level Directory structure
+```
 .
 ├── Docs
 ├── README.md
 └── microservices
-
+```
 ## Microservices Directory
+```
 .
 ├── Addition
 │   ├── Dockerfile
@@ -75,12 +77,14 @@ Earlier the four functions **Addition,Subtraction,Multiplication,Division** were
 └── landing
     ├── Dockerfile
     └── app
-
+```
 
 
 ## Commands 
-**docker-compose up -d** builds all images and starts services
-**docker-compose down** stops all running processess
+builds all images and starts services
+```docker-compose up -d ```
+stops all running processess
+```docker-compose down```
 
 
 __________________________________________________________________________________
